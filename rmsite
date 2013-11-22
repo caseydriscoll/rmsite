@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Make sure only root can run our script
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+# Make sure a domain is passed in
+if [[ $# -eq 0 ]] ; then
+     echo 'use: rmsite domain.com'
+     exit 0
+fi
+
+DOMAIN=$1
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+does_file_exist () {
+  if [ -f $1 ];
+  then
+     echo "File $1 exists"
+  else
+     echo "File $1 does not exists"
+     ALL_IS_HERE=false
+  fi
+}
+
+# Make sure all the files are there
+ALL_IS_HERE=true
+
+does_file_exist "/etc/nginx/sites-available/$DOMAIN"
+
+echo "It is $ALL_IS_HERE that everything is here."
+
+if $ALL_IS_HERE ; then
+  echo "Are you sure you want to delete $DOMAIN?"
+    select yn in "Yes" "No"; do
+      case $yn in
+        Yes ) make install; break;;
+        No ) exit;;
+      esac
+  done
+else
+  echo "Sorry, I cannot continue if everything isn't here"
+fi
