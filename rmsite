@@ -39,10 +39,12 @@ if $ALL_IS_HERE ; then
     case $yn in
       Yes) break;;
       No) exit;;
+      *) echo ok;;
     esac
   done
 else
   echo "Sorry, I cannot continue if everything isn't here"
+  exit 1
 fi
 
 echo "Ok, removing $DOMAIN"
