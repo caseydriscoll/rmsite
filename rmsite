@@ -37,10 +37,12 @@ if $ALL_IS_HERE ; then
   echo "Are you sure you want to delete $DOMAIN?"
     select yn in "Yes" "No"; do
       case $yn in
-        Yes ) make install; break;;
+        Yes ) break;;
         No ) exit;;
       esac
   done
 else
   echo "Sorry, I cannot continue if everything isn't here"
 fi
+
+echo "Ok, removing $DOMAIN"
