@@ -37,8 +37,8 @@ if $ALL_IS_HERE ; then
   echo "Are you sure you want to delete $DOMAIN?"
   select yn in "Yes" "No"; do
     case $yn in
-      Yes) break;;
-      No) exit;;
+      [yY] | [yY][Ee][Ss] ) break;;
+      [nN] | [n|N][O|o] ) exit;;
       *) echo ok;;
     esac
   done
