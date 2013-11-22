@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # Make sure only root can run our script
 if [ "$(id -u)" != "0" ]; then
@@ -37,8 +37,8 @@ if $ALL_IS_HERE ; then
   echo "Are you sure you want to delete $DOMAIN?"
     select yn in "Yes" "No"; do
       case $yn in
-        Yes ) break;;
-        No ) exit;;
+        Yes) break;;
+        No) exit;;
       esac
   done
 else
