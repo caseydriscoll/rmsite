@@ -35,11 +35,11 @@ echo "It is $ALL_IS_HERE that everything is here."
 
 if $ALL_IS_HERE ; then
   echo "Are you sure you want to delete $DOMAIN?"
-    select yn in "Yes" "No"; do
-      case $yn in
-        Yes) break;;
-        No) exit;;
-      esac
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes) break;;
+      No) exit;;
+    esac
   done
 else
   echo "Sorry, I cannot continue if everything isn't here"
