@@ -47,4 +47,16 @@ else
   exit 1
 fi
 
-echo "Ok, removing $DOMAIN"
+rm -f "/etc/nginx/sites-available/$DOMAIN"
+rm -f "/etc/nginx/sites-enabled/$DOMAIN"
+
+ALL_IS_HERE=true
+
+does_file_exist "/etc/nginx/sites-available/$DOMAIN"
+does_file_exist "/etc/nginx/sites-enabled/$DOMAIN"
+
+if ! $ALL_IS_HERE ; then
+  echo "Successfully deleted all files for $DOMAIN"
+else
+  echo "Sorry something went wrong"
+fi
