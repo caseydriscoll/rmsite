@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # Make sure only root can run our script
 if [ "$(id -u)" != "0" ]; then
@@ -47,9 +47,11 @@ else
   exit 1
 fi
 
+# Remove files
 rm -f "/etc/nginx/sites-available/$DOMAIN"
 rm -f "/etc/nginx/sites-enabled/$DOMAIN"
 
+# Confirm all files were deleted
 ALL_IS_HERE=true
 
 does_file_exist "/etc/nginx/sites-available/$DOMAIN"
@@ -58,5 +60,5 @@ does_file_exist "/etc/nginx/sites-enabled/$DOMAIN"
 if ! $ALL_IS_HERE ; then
   echo "Successfully deleted all files for $DOMAIN"
 else
-  echo "Sorry something went wrong"
+  echo "Sorry, something went wrong"
 fi
