@@ -35,7 +35,7 @@ echo "It is $ALL_IS_HERE that everything is here."
 
 if $ALL_IS_HERE ; then
   echo "Are you sure you want to delete $DOMAIN?"
-  select yn in; do
+  select yn in yes no ; do
     case $yn in
       yes ) break;;
       no ) exit;;
