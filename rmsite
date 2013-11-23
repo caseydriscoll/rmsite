@@ -25,11 +25,22 @@ does_file_exist () {
   fi
 }
 
+does_dir_exist () {
+  if [ -d $1 ];
+  then
+     echo "Directory $1 exists"
+  else
+     echo "Directory $1 does not exists"
+     ALL_IS_HERE=false
+  fi
+}
+
 # Make sure all the files are there
 ALL_IS_HERE=true
 
 does_file_exist "/etc/nginx/sites-available/$DOMAIN"
 does_file_exist "/etc/nginx/sites-enabled/$DOMAIN"
+does_dir_exist  "/srv/www/$DOMAIN/"
 
 echo "It is $ALL_IS_HERE that everything is here."
 
@@ -48,14 +59,16 @@ else
 fi
 
 # Remove files
-rm -f "/etc/nginx/sites-available/$DOMAIN"
-rm -f "/etc/nginx/sites-enabled/$DOMAIN"
+rm -rf "/etc/nginx/sites-available/$DOMAIN"
+rm -rf "/etc/nginx/sites-enabled/$DOMAIN"
+rm -rf "/srv/www/$DOMAIN/"
 
 # Confirm all files were deleted
 ALL_IS_HERE=true
 
 does_file_exist "/etc/nginx/sites-available/$DOMAIN"
 does_file_exist "/etc/nginx/sites-enabled/$DOMAIN"
+does_dir_exist  "/srv/www/$DOMAIN/"
 
 if ! $ALL_IS_HERE ; then
   echo "Successfully deleted all files for $DOMAIN"
