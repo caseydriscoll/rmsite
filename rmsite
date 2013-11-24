@@ -14,6 +14,7 @@ fi
 
 DOMAIN=$1
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DB_NAME=${DOMAIN/\./_}
 
 does_file_exist () {
   if [ -f $1 ];
@@ -62,6 +63,8 @@ fi
 rm -rf "/etc/nginx/sites-available/$DOMAIN"
 rm -rf "/etc/nginx/sites-enabled/$DOMAIN"
 rm -rf "/srv/www/$DOMAIN/"
+
+mysql -uroot -p -e "drop database $DB_NAME;"
 
 # Confirm all files were deleted
 ALL_IS_HERE=true
